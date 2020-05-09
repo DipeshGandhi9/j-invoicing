@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Home from "./pages/home.component"
-import Layout from "./pages/layout.component"
+import Home from "./pages/home.component";
+import Layout from "./pages/layout.component";
 
 class App extends Component {
 
