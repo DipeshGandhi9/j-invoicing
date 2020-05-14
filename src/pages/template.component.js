@@ -96,7 +96,7 @@ class Template extends Component {
 
     setOpen = (open) => {
         this.setState({
-            open : open,
+            open: open,
         });
     }
 
@@ -109,8 +109,8 @@ class Template extends Component {
     };
 
     render() {
-        
-        const {classes, theme} = this.props;
+
+        const { classes, theme } = this.props;
         console.log(this.props);
 
         return (
@@ -209,4 +209,4 @@ class Template extends Component {
 
 const template = withTheme(Template);
 
-export default withStyles(useStyles) (template);
+export default withStyles(useStyles)(template);

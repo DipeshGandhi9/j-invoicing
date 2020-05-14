@@ -22,27 +22,29 @@ const useStyles = (theme) => ({
     },
 });
 
-class Layout extends Component {
+export default function AuthenticatedLayout(WrrappedComponent) {
+    class Layout extends Component {
 
-    render() {
-        
-        const {classes} = this.props;
-        console.log(this.props);
+        render() {
 
-        return (
-            <div className={classes.root}>
-                <CssBaseline />
+            const { classes } = this.props;
 
-                <Navbar />
+            return (
+                <div className={classes.root}>
+                    <CssBaseline />
 
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
+                    <Navbar />
 
-                    {this.props.children}
-                </main>
-            </div>
-        )
-    };
+                    <main className={classes.content}>
+                        <div className={classes.toolbar} />
+
+                        <WrrappedComponent {...this.props} classes={this.classes} />
+                    </main>
+                </div>
+            )
+        };
+    }
+
+    return withStyles(useStyles)(Layout);
+
 }
-
-export default withStyles(useStyles)(Layout);

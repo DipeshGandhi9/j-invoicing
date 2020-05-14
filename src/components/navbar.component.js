@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import React, { Component } from 'react';
+import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -80,7 +80,7 @@ class Navbar extends Component {
                 </AppBar>
 
                 <SideMenu open={this.state.open} toggleDrawer={this.toggleDrawer} />
-                
+
             </React.Fragment>
         )
     }

@@ -107,26 +107,26 @@ class SideMenu extends Component {
         return (
 
             <Drawer
-                    variant="permanent"
-                    className={clsx(classes.drawer, {
+                variant="permanent"
+                className={clsx(classes.drawer, {
+                    [classes.drawerOpen]: this.state.open,
+                    [classes.drawerClose]: !this.state.open,
+                })}
+                classes={{
+                    paper: clsx({
                         [classes.drawerOpen]: this.state.open,
                         [classes.drawerClose]: !this.state.open,
-                    })}
-                    classes={{
-                        paper: clsx({
-                            [classes.drawerOpen]: this.state.open,
-                            [classes.drawerClose]: !this.state.open,
-                        }),
-                    }}
-                >
-                    <div className={classes.toolbar}>
-                        <IconButton onClick={this.toggleDrawer}>
-                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    {this.list(classes)}
-                </Drawer>
+                    }),
+                }}
+            >
+                <div className={classes.toolbar}>
+                    <IconButton onClick={this.toggleDrawer}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+                {this.list(classes)}
+            </Drawer>
 
         )
     }
