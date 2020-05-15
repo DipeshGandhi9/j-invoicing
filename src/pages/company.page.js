@@ -23,7 +23,7 @@ const useStyles = (theme) => ({
     }
 });
 
-class Home extends Component {
+class Company extends Component {
 
     render() {
         const { classes } = this.props;
@@ -36,7 +36,7 @@ class Home extends Component {
                             <Grid item xs={12}>
 
                                 <Typography variant="h4" align='left' noWrap>
-                                    Home View
+                                    Company
                                 </Typography>
                             </Grid>
 
@@ -143,4 +143,4 @@ class Home extends Component {
 
 }
 
-export default withStyles(useStyles)(Home);
+export default withStyles(useStyles)(Company);

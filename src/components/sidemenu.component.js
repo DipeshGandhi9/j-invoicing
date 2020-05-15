@@ -9,10 +9,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import BusinessIcon from '@material-ui/icons/Business';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import QueueIcon from '@material-ui/icons/Queue';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
+import AppsIcon from '@material-ui/icons/Apps';
 
 const drawerWidth = 240;
 
@@ -50,12 +54,14 @@ const useStyles = (theme) => ({
     },
 });
 
+
 class SideMenu extends Component {
 
     constructor(props) {
         super(props);
 
         this.toggleDrawer = this.toggleDrawer.bind(this);
+        this.goTo = this.goTo.bind(this);
 
         this.state = {
             open: props.open
@@ -75,24 +81,46 @@ class SideMenu extends Component {
         this.props.toggleDrawer();
     };
 
-    list = (classes) => (
+    goTo(link) {
+        this.props.history.push(link);
+    }
+
+    getIcon = (value) => {
+        switch (value) {
+            case 'Dashboard':
+                return <DashboardIcon />;
+            case 'Invoice':
+                return <ReceiptIcon />;
+            case 'Customer':
+                return <RecentActorsIcon />;
+            case 'Products':
+                return <QueueIcon />;
+            case 'Company':
+                return <BusinessIcon />;
+            default :
+                return <AppsIcon />;
+        }
+    }
+
+    listItems = (classes) => (
         <div className={clsx(classes.list)}
             role="presentation"
-            onClick={this.toggleDrawer}
-            onKeyDown={this.toggleDrawer}  >
+            // onClick={this.toggleDrawer}
+            // onKeyDown={this.toggleDrawer}
+              >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                {['Dashboard', 'Invoice', 'Customer'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => this.goTo(text.toLowerCase())}>
+                        <ListItemIcon>{this.getIcon(text)}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                {['Products', 'Company'].map((text, index) => (
+                    <ListItem button key={text}  onClick={() => this.goTo(text.toLowerCase())}>
+                        <ListItemIcon>{this.getIcon(text)}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -125,7 +153,7 @@ class SideMenu extends Component {
                     </IconButton>
                 </div>
                 <Divider />
-                {this.list(classes)}
+                {this.listItems(classes)}
             </Drawer>
 
         )

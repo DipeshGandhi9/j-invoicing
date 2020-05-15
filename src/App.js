@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import Home from "./pages/home.page";
-import Template from './pages/template.component';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+
 import AuthenticatedRoute from './routes/authenticated.route';
 import UnauthenticatedRoute from './routes/unauthenticated.route';
+
+import Login from './pages/login.page';
+import Dashboard from './pages/dashboard.page';
+import Company from './pages/company.page';
 
 const theme = createMuiTheme({
   palette: {
@@ -31,9 +34,10 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <Router>
             <Switch>
-              <Route exact path='/' component={Template} />
-              <UnauthenticatedRoute exact path='/login' component={Home} />
-              <AuthenticatedRoute exact path='/home' component={Home} />
+              <UnauthenticatedRoute exact path='/login' component={Login} />
+              <AuthenticatedRoute exact path='/dashboard' component={Dashboard} />
+              <AuthenticatedRoute exact path='/company' component={Company} />
+              <Redirect from='/' to='/dashboard'/>
               <UnauthenticatedRoute path='*' component={() => <h2> 404 Not found </h2>} />
             </Switch>
           </Router>

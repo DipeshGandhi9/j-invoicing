@@ -79,7 +79,7 @@ class Navbar extends Component {
                     </Toolbar>
                 </AppBar>
 
-                <SideMenu open={this.state.open} toggleDrawer={this.toggleDrawer} />
+                <SideMenu history={this.props.history}  open={this.state.open} toggleDrawer={this.toggleDrawer} />
 
             </React.Fragment>
         )

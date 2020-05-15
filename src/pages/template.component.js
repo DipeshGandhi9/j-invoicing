@@ -19,6 +19,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 
@@ -137,6 +138,7 @@ class Template extends Component {
                         <Typography variant="h6" noWrap>
                             Mini variant drawer
           </Typography>
+            <Button variant="contained" color="primary" disableElevation href="/login">Login</Button>
                     </Toolbar>
                 </AppBar>
                 <Drawer

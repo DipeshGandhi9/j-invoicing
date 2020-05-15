@@ -33,7 +33,7 @@ export default function AuthenticatedLayout(WrrappedComponent) {
                 <div className={classes.root}>
                     <CssBaseline />
 
-                    <Navbar />
+                    <Navbar {...this.props}  classes={this.classes} />
 
                     <main className={classes.content}>
                         <div className={classes.toolbar} />
