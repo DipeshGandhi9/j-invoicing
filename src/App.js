@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-
+import { Router, Switch, Redirect } from 'react-router-dom';
 import AuthenticatedRoute from './routes/authenticated.route';
 import UnauthenticatedRoute from './routes/unauthenticated.route';
+import { setAuthorizationToken } from './routes/auth';
+import history from './config/history';
 
 import Login from './pages/login.page';
 import Dashboard from './pages/dashboard.page';
@@ -19,25 +20,21 @@ const theme = createMuiTheme({
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoggedIn: true,
-    }
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    setAuthorizationToken(token);
   }
-
 
   render() {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
-          <Router>
+          <Router history={history}>
             <Switch>
               <UnauthenticatedRoute exact path='/login' component={Login} />
               <AuthenticatedRoute exact path='/dashboard' component={Dashboard} />
               <AuthenticatedRoute exact path='/company' component={Company} />
-              <Redirect from='/' to='/dashboard'/>
+              <Redirect from='/' to='/dashboard' />
               <UnauthenticatedRoute path='*' component={() => <h2> 404 Not found </h2>} />
             </Switch>
           </Router>

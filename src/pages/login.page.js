@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Container from "@material-ui/core/Container"
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles, Grid, Card, CardHeader, CardContent, CardActions, TextField } from '@material-ui/core';
 import Jambotron from '../components/jambotron.component';
-import auth from '../routes/auth';
-
+import { doLogin } from '../actions/login.action'
+import { connect } from 'react-redux';
 
 const useStyles = (theme) => ({
     container: {
@@ -24,19 +25,22 @@ const useStyles = (theme) => ({
 });
 
 class Login extends Component {
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        isFetching: PropTypes.bool,
+
+        doLogin: PropTypes.func,
+    }
+
     constructor(props) {
         super(props);
-    this.doLogin = this.doLogin.bind(this);
-}
+        this.doLoginUser = this.doLoginUser.bind(this);
+    }
 
-doLogin() {
-    console.log('do login called...');
-    // auth.isAuthenticated();
-    auth.doLogin(() => {
-        // console.log( this.props.history);
-        this.props.history.push('/dashboard')
-    });
-}
+    doLoginUser() {
+        this.props.doLogin({ uname: 'Test' });
+    }
 
     render() {
         const { classes } = this.props;
@@ -136,7 +140,7 @@ doLogin() {
 
                                         <Grid item xs={12} md={8} align='center' className={classes.buttonContainer}>
                                             <Button variant="outlined"> Reset </Button>
-                                            <Button variant="contained" color="primary" disableElevation onClick={this.doLogin}> Login </Button>
+                                            <Button variant="contained" color="primary" disableElevation disable={this.props.isFetching ? "true" : "false"} onClick={this.doLoginUser}> {this.props.isFetching ? 'Logging...' : 'Login'} </Button>
                                         </Grid>
 
                                         <Grid item xs={1} md={2}>
@@ -160,4 +164,17 @@ doLogin() {
 
 }
 
-export default withStyles(useStyles)(Login);
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        isFetching: state.auth.isFetching,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        doLogin: (creds) => { dispatch(doLogin(creds)) }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Login));

@@ -1,7 +1,7 @@
 import React from 'react';
-import auth from './auth';
 import { Route, Redirect } from 'react-router-dom';
 import AuthenticatedLayout from '../pages/authenticated.layout';
+import { connect } from 'react-redux';
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
 
@@ -10,7 +10,7 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
     return (<Route {...rest}
         render={
             props => {
-                if (auth.isAuthenticated()) {
+                if (rest.isAuthenticated) {
                     return <AuthenticatedLayoutComponent {...props}></AuthenticatedLayoutComponent>
                 } else {
                     return <Redirect to={
@@ -27,8 +27,12 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
         } />
     );
 
-
-
 }
 
-export default AuthenticatedRoute;
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+    }
+};
+
+export default connect(mapStateToProps)(AuthenticatedRoute);

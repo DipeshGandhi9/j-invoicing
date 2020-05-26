@@ -1,27 +1,9 @@
-class Auth {
+import axios from 'axios';
 
-    constructor() {
-        this.authenticated = false;
+export function setAuthorizationToken(token) {
+    if (token != null) {
+        axios.defaults.headers.common.authorization = `Bearer ${token}`;
+    } else {
+        delete axios.defaults.headers.common.authorization;
     }
-
-    doLogin(callback) {
-        this.authenticated = true;
-        if (callback) {
-            callback();
-        }
-    }
-
-    doLogout(callback) {
-        this.authenticated = false;
-        if (callback) {
-            callback();
-        }
-    }
-
-    isAuthenticated() {
-        return this.authenticated;
-    }
-
 }
-
-export default new Auth();
