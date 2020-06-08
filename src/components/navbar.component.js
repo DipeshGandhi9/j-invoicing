@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import SideMenu from './sidemenu.component';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Grid } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -76,10 +78,28 @@ class Navbar extends Component {
                             <MenuIcon />
                         </IconButton>
                         <img src={require("../assets/images/JyotiTechnsoft-Banner-Name.png")} alt="Jyoti Technosoft" className="m-10" width="150" onClick={this.toggleDrawer}></img>
+
+                        <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                            <IconButton
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </Grid>
+
+
                     </Toolbar>
+
+                    <div>
+
+                    </div>
+
                 </AppBar>
 
-                <SideMenu history={this.props.history}  open={this.state.open} toggleDrawer={this.toggleDrawer} />
+                <SideMenu history={this.props.history} open={this.state.open} toggleDrawer={this.toggleDrawer} />
 
             </React.Fragment>
         )

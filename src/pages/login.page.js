@@ -140,7 +140,7 @@ class Login extends Component {
 
                                         <Grid item xs={12} md={8} align='center' className={classes.buttonContainer}>
                                             <Button variant="outlined"> Reset </Button>
-                                            <Button variant="contained" color="primary" disableElevation disable={this.props.isFetching ? "true" : "false"} onClick={this.doLoginUser}> {this.props.isFetching ? 'Logging...' : 'Login'} </Button>
+                                            <Button variant="contained" color="primary" disableElevation disabled={this.props.isFetching ? true : false} onClick={this.doLoginUser}> {this.props.isFetching ? 'Logging...' : 'Login'} </Button>
                                         </Grid>
 
                                         <Grid item xs={1} md={2}>

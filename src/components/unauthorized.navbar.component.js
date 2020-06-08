@@ -20,10 +20,10 @@ const useStyles = (theme) => ({
 
 class UnAuthNavbar extends Component {
 
-    constructor(props) {
-        super(props);
-        this.doLogin = this.doLogin.bind(this);
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.doLogin = this.doLogin.bind(this);
+    // }
 
     render() {
         const { classes } = this.props;

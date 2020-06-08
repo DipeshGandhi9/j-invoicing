@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/actionType';
 import history from '../config/history';
+import { setAuthorizationToken } from '../routes/auth';
 
 function requestLogin() {
   return {
@@ -29,6 +30,24 @@ function loginError(message) {
   }
 }
 
+function retriveAuthenticationRequest() {
+  return {
+    type: actionTypes.RETRIVE_AUTHENTICATION_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+  }
+}
+
+function retriveAuthenticationSucess(user) {
+  return {
+    type: actionTypes.RETRIVE_AUTHENTICATION_SUCCESS,
+    user,
+    isFetching: false,
+    isAuthenticated: true,
+    id_token: user.id_token,
+  }
+}
+
 //dummy api call
 export const doLogin = (creds) => {
 
@@ -36,8 +55,10 @@ export const doLogin = (creds) => {
     dispatch(requestLogin());
     setTimeout(() => {
       if (creds && creds.uname === 'Test') {
-        dispatch(receiveLogin({ id_token: 1, name: "Test" }));
-        history.push('/dashboard');
+        const user = { id_token: 1, name: "Test" };
+        localStorage.setItem('id_token', user.id_token);
+        dispatch(receiveLogin(user));
+        history.push('/organization');
       } else {
         dispatch(loginError("Incorrect User."));
       }
@@ -45,3 +66,19 @@ export const doLogin = (creds) => {
   }
 }
 
+export const loadAuthentication = () => {
+
+  return dispatch => {
+    dispatch(retriveAuthenticationRequest());
+    const idToken = localStorage.getItem('id_token');
+    if (idToken != null) {
+      const user = { id_token: idToken, name: "Test" };
+      setAuthorizationToken(idToken);
+      dispatch(retriveAuthenticationSucess(user));
+      history.push('/');
+    } else {
+      dispatch(loginError("Incorrect User."));
+      history.push('/login');
+    }
+  }
+}

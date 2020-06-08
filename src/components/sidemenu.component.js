@@ -95,9 +95,9 @@ class SideMenu extends Component {
                 return <RecentActorsIcon />;
             case 'Products':
                 return <QueueIcon />;
-            case 'Company':
+            case 'Organization':
                 return <BusinessIcon />;
-            default :
+            default:
                 return <AppsIcon />;
         }
     }
@@ -105,9 +105,9 @@ class SideMenu extends Component {
     listItems = (classes) => (
         <div className={clsx(classes.list)}
             role="presentation"
-            // onClick={this.toggleDrawer}
-            // onKeyDown={this.toggleDrawer}
-              >
+        // onClick={this.toggleDrawer}
+        // onKeyDown={this.toggleDrawer}
+        >
             <List>
                 {['Dashboard', 'Invoice', 'Customer'].map((text, index) => (
                     <ListItem button key={text} onClick={() => this.goTo(text.toLowerCase())}>
@@ -118,8 +118,8 @@ class SideMenu extends Component {
             </List>
             <Divider />
             <List>
-                {['Products', 'Company'].map((text, index) => (
-                    <ListItem button key={text}  onClick={() => this.goTo(text.toLowerCase())}>
+                {['Products', 'Organization'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => this.goTo(text.toLowerCase())}>
                         <ListItemIcon>{this.getIcon(text)}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
