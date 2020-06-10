@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Login from './pages/login.page';
 import Dashboard from './pages/dashboard.page';
 import Organization from './pages/organization.page';
+import Customer from'./pages/customer/customer.form.page';
 
 const theme = createMuiTheme({
   palette: {
@@ -30,7 +31,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.loadAuthentication();
+    console.log("App.js ", history.location.pathname);
+    this.props.loadAuthentication(history.location.pathname);
   }
 
   render() {
@@ -42,6 +44,10 @@ class App extends Component {
               <UnauthenticatedRoute exact path='/login' component={Login} />
               <AuthenticatedRoute exact path='/dashboard' component={Dashboard} />
               <AuthenticatedRoute exact path='/organization' component={Organization} />
+
+              <AuthenticatedRoute exact path='/customer' component={Customer} />
+              <AuthenticatedRoute exact path='/customer/:id' component={Customer} />
+
               <Redirect from='/' to='/dashboard' />
               <UnauthenticatedRoute path='*' component={() => <h2> 404 Not found </h2>} />
             </Switch>
@@ -61,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadAuthentication: () => { dispatch(loadAuthentication()) }
+    loadAuthentication: (redirectTo) => { dispatch(loadAuthentication(redirectTo)) }
   }
 };
 

@@ -20,7 +20,11 @@ const useStyles = (theme) => ({
         '& > *': {
             margin: theme.spacing(1),
         },
+    },
+    fieldGroup: {
+        padding: theme.spacing(4),
     }
+
 });
 
 class Organization extends Component {
@@ -65,17 +69,17 @@ class Organization extends Component {
 
                                 <Grid item xs={12} md={8}>
                                     <form>
-                                        <Grid container spacing={3}>
+                                        <Grid container spacing={3} className={classes.fieldGroup}>
 
                                             <Grid item xs={12} sm={12} md={12}  >
-                                                <Typography variant="h6" align="left" color='primary' > Company Information </Typography>
+                                                <Typography variant="h6" align="left" color='primary' > Organization Information </Typography>
                                             </Grid>
 
                                             <Grid item xs={12} sm={12} md={6}  >
                                                 <TextField
-                                                    id="filled-helperText"
-                                                    label="Helper text"
-                                                    defaultValue="Default Value"
+                                                    id="org-name"
+                                                    label="Organization Name"
+                                                    // defaultValue=""
                                                     helperText=""
                                                     required
                                                     fullWidth
@@ -85,9 +89,9 @@ class Organization extends Component {
 
                                             <Grid item xs={12} sm={12} md={6} >
                                                 <TextField
-                                                    id="filled-helperText"
-                                                    label="Helper text"
-                                                    defaultValue="Default Value"
+                                                    id="org-tagline"
+                                                    label="Tag Line"
+                                                    // defaultValue=""
                                                     helperText=""
                                                     required
                                                     fullWidth
@@ -97,15 +101,120 @@ class Organization extends Component {
 
                                             <Grid item xs={12} sm={12} md={6}>
                                                 <TextField
-                                                    id="filled-helperText"
-                                                    label="Helper text"
-                                                    defaultValue="Default Value"
+                                                    id="org-gst"
+                                                    label="GST Number"
+                                                    // defaultValue=""
                                                     helperText=""
                                                     required
                                                     fullWidth
 
                                                 />
                                             </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-vat"
+                                                    label="VAT Number"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                        </Grid>
+
+                                        <Grid container spacing={3}  className={classes.fieldGroup}>
+
+                                            <Grid item xs={12} sm={12} md={12}  >
+                                                <Typography variant="h6" align="left" color='primary' > Contact Information </Typography>
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}  >
+                                                <TextField
+                                                    id="org-email"
+                                                    label="Email"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6} >
+                                                <TextField
+                                                    id="org-contact-no"
+                                                    label="Contact Number"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-street"
+                                                    label="Street Address"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-area"
+                                                    label="Area"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-city"
+                                                    label="City"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-state"
+                                                    label="State"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12} sm={12} md={6}>
+                                                <TextField
+                                                    id="org-pincode"
+                                                    label="Pincode"
+                                                    // defaultValue=""
+                                                    helperText=""
+                                                    required
+                                                    fullWidth
+
+                                                />
+                                            </Grid>
+
                                         </Grid>
                                     </form>
                                 </Grid>

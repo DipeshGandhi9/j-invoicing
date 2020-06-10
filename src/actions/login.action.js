@@ -66,7 +66,7 @@ export const doLogin = (creds) => {
   }
 }
 
-export const loadAuthentication = () => {
+export const loadAuthentication = (redirectTo) => {
 
   return dispatch => {
     dispatch(retriveAuthenticationRequest());
@@ -75,7 +75,9 @@ export const loadAuthentication = () => {
       const user = { id_token: idToken, name: "Test" };
       setAuthorizationToken(idToken);
       dispatch(retriveAuthenticationSucess(user));
-      history.push('/');
+      // console.log(history.location.pathname);
+      // history.push(redirectTo);
+      history.push("/");
     } else {
       dispatch(loginError("Incorrect User."));
       history.push('/login');
