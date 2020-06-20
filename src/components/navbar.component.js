@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { logoutUser } from '../actions/logout.action';
+import { connect } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -41,6 +44,12 @@ const useStyles = (theme) => ({
 
 class Navbar extends Component {
 
+    static propTypes = {
+        isFetching: PropTypes.bool,
+
+        doLogout: PropTypes.func,
+    }
+
     constructor(props) {
         super(props);
 
@@ -48,10 +57,24 @@ class Navbar extends Component {
             open: true,
             anchorEl: null,
         };
+
+        this.handleMenuClick = this.handleMenuClick.bind(this);
+        this.handleMenuClose = this.handleMenuClose.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleMenuClick = event => this.setState({ anchorEl: event.currentTarget })
-    handleMenuClose = () => this.setState({ anchorEl: null })
+    handleMenuClick(event) {
+        this.setState({ anchorEl: event.currentTarget });
+    }
+
+    handleMenuClose() {
+        this.setState({ anchorEl: null });
+    }
+
+    handleLogout() {
+        this.handleMenuClose();
+        this.props.doLogout();
+    }
 
     toggleDrawer = () => {
         this.setState({ open: !this.state.open })
@@ -116,11 +139,11 @@ class Navbar extends Component {
                     id='primary-search-account-menu'
                     keepMounted
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    open={Boolean (anchorEl)}
+                    open={Boolean(anchorEl)}
                     onClose={this.handleMenuClose}
                 >
                     <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleMenuClose}>Log out</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
                 </Menu>
 
             </React.Fragment>
@@ -129,4 +152,16 @@ class Navbar extends Component {
 
 }
 
-export default withStyles(useStyles)(Navbar);
+const mapStateToProps = (state) => {
+    return {
+        isFetching: state.auth.isFetching,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        doLogout: () => { dispatch(logoutUser()) }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (withStyles(useStyles)(Navbar));

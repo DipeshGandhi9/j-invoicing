@@ -1,4 +1,4 @@
-import { LOGOUT_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants/actionType';
+import { LOGOUT_REQUEST, LOGOUT_SUCCESS } from '../constants/actionType';
 
 function requestLogout() {
   return {
@@ -16,7 +16,7 @@ function receiveLogout() {
 }
 
 // Logs the user out
-export function logoutUser() {
+export const logoutUser = () => {
   return dispatch => {
     dispatch(requestLogout())
     localStorage.removeItem('id_token')

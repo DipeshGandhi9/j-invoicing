@@ -58,7 +58,7 @@ export const doLogin = (creds) => {
         const user = { id_token: 1, name: "Test" };
         localStorage.setItem('id_token', user.id_token);
         dispatch(receiveLogin(user));
-        history.push('/organization');
+        history.push('/');
       } else {
         dispatch(loginError("Incorrect User."));
       }
@@ -76,8 +76,7 @@ export const loadAuthentication = (redirectTo) => {
       setAuthorizationToken(idToken);
       dispatch(retriveAuthenticationSucess(user));
       // console.log(history.location.pathname);
-      // history.push(redirectTo);
-      history.push("/");
+      history.push(redirectTo);
     } else {
       dispatch(loginError("Incorrect User."));
       history.push('/login');
