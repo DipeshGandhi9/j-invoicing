@@ -6,9 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import SideMenu from './sidemenu.component';
+import { Grid } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Grid } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -43,9 +45,13 @@ class Navbar extends Component {
         super(props);
 
         this.state = {
-            open: true
+            open: true,
+            anchorEl: null,
         };
     }
+
+    handleMenuClick = event => this.setState({ anchorEl: event.currentTarget })
+    handleMenuClose = () => this.setState({ anchorEl: null })
 
     toggleDrawer = () => {
         this.setState({ open: !this.state.open })
@@ -53,6 +59,7 @@ class Navbar extends Component {
 
     render() {
         const { classes } = this.props;
+        const { anchorEl } = this.state
 
         return (
             <React.Fragment>
@@ -83,8 +90,10 @@ class Navbar extends Component {
                             <IconButton
                                 edge="end"
                                 aria-label="account of current user"
+                                aria-controls="primary-search-account-menu"
                                 aria-haspopup="true"
                                 color="inherit"
+                                onClick={this.handleMenuClick}
                             >
                                 <AccountCircle />
                             </IconButton>
@@ -100,6 +109,19 @@ class Navbar extends Component {
                 </AppBar>
 
                 <SideMenu history={this.props.history} open={this.state.open} toggleDrawer={this.toggleDrawer} />
+
+                <Menu
+                    anchorEl={anchorEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    id='primary-search-account-menu'
+                    keepMounted
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={Boolean (anchorEl)}
+                    onClose={this.handleMenuClose}
+                >
+                    <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+                    <MenuItem onClick={this.handleMenuClose}>Log out</MenuItem>
+                </Menu>
 
             </React.Fragment>
         )

@@ -30,8 +30,9 @@ class App extends Component {
     loadAuthentication: PropTypes.func,
   }
 
-  componentDidMount() {
-    console.log("App.js ", history.location.pathname);
+  constructor(props) {
+    super(props);
+
     this.props.loadAuthentication(history.location.pathname);
   }
 
